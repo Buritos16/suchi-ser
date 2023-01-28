@@ -10,7 +10,7 @@ app.get('/', (req, res) => {
 })
 app.get('/qiwi/create', QiwiController.createPayment);
 
-app.listen(4444, (err) => {
+app.listen(process.env.PORT || 4444, (err) => {
     if (err) {
         console.log('err')
         console.log(err)
