@@ -34,7 +34,6 @@ export const createPayment = async (req, res) => {
         billId: billId,
         successUrl: 'https://cloudsushi.ru',
         account: req.query.account,
-        lifetime: encodeURIComponent(life)
     };
 
     const link = await qiwiApi.createPaymentForm(params);
