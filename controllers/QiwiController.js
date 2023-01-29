@@ -7,12 +7,33 @@ export const createPayment = async (req, res) => {
     const billId = qiwiApi.generateId();
     const publicKey = '48e7qUxn9T7RyYE1MVZswX1FRSbE6iyCj2gCRwwF3Dnh5XrasNTx3BGPiMsyXQFNKQhvukniQG8RTVhYm3iPuajXbgBuWD7dsZ3zu2WJ5P5mSMPzbxuGLLAmHDD6AwbsshS42LLYp2BesJZBBHMr9BfLJRqvHGLq1UooF3rJGe8EHrZ6qkYLwKAEmyjQn';
 
+    const date = new Date(Date.now())
+    let Y = date.getFullYear().toString()
+    let M = (date.getMonth() + 1).toString()
+    if (date.getMonth() < 10) {
+        M = `0${date.getMonth() + 1}`
+    }
+    let D = (date.getDate()).toString()
+    if (date.getDate() < 10) {
+        D = `0${date.getDate()}`
+    }
+    let h = (date.getHours() + 2).toString()
+    if (date.getHours() < 10) {
+        h = `0${date.getHours() + 2}`
+    }
+    let m = date.getMinutes().toString()
+    if (date.getMinutes() < 10) {
+        m = `0${date.getMinutes()}`
+    }
+    let life = `${Y}-${M}-${D}T${h}${m}`
+
+
     const params = {
         publicKey,
         amount: 1,
         billId: billId,
         successUrl: 'https://test.ru',
-        lifetime: '2023-01-28T1344'
+        lifetime: encodeURIComponent(life)
     };
 
     const link = await qiwiApi.createPaymentForm(params);
