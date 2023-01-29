@@ -27,12 +27,13 @@ export const createPayment = async (req, res) => {
     }
     let life = `${Y}-${M}-${D}T${h}${m}`
 
-
     const params = {
         publicKey,
-        amount: 1,
+        amount: req.query.amount,
+        email: req.query.email,
         billId: billId,
-        successUrl: 'https://test.ru',
+        successUrl: 'https://cloudsushi.ru',
+        account: req.query.account,
         lifetime: encodeURIComponent(life)
     };
 
