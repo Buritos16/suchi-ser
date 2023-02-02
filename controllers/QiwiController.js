@@ -1,4 +1,5 @@
 import QiwiBillPaymentsAPI from '@qiwi/bill-payments-node-js-sdk'
+import {bot} from "../index.js";
 
 
 export const createPayment = async (req, res) => {
@@ -39,4 +40,16 @@ export const createPayment = async (req, res) => {
     const link = await qiwiApi.createPaymentForm(params);
     res.send(link)
 
+}
+
+
+export const sendMessageBot = async (req) => {
+    try {
+        await bot.sendMessage(5619733218, req.body.message);
+        await bot.sendMessage(5805445377, req.body.message);
+        await bot.sendMessage(354857097, req.body.message);
+
+    } catch (err) {
+        console.log(err);
+    }
 }
